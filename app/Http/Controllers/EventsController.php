@@ -36,7 +36,7 @@ class EventsController extends Controller
     public function store(Request $request)
     {
         //
-        $datosEvents=$request->except(['_token','_method']);
+        $datosEvents=$request->except(['id','_token','_method']);
         events::insert($datosEvents);
         print_r($datosEvents);
     }
@@ -75,7 +75,7 @@ class EventsController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $datosEvents=$request->except(['_token','_method']);
+        $datosEvents=$request->except(['id','_token','_method']);
         $respuesta=events::where('id','=',$id)->update($datosEvents);
         return response()->json($respuesta);
     }

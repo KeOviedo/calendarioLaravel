@@ -23,45 +23,81 @@
             Plugin: ['dayGrid', 'interaction', 'timeGrid', 'list'],
             headerToolbar: {
                 // left: 'prev,next today miBoton',
-                left: 'prev,next today miBoton',
+                left: 'prev,next today miBoton otroB',
                 center: 'title',
                 right: 'dayGridMonth,timeGridWeek,timeGridDay'
             },
             customButtons: {
                 miBoton: {
-                    text: "Translate",
+                    text: "Spanish",
                     click: function() {
-                        
+
 
                         calendar.setOption('locale', 'ES');
 
-                        console.log(calendar.getOption('locale'));
+                        //console.log(calendar.getOption('locale'));
 
-                        document.querySelector('#lblTitulo').innerText = 'Título';
-                        document.querySelector('#lblHora').innerText = 'Hora';
-                        document.querySelector('#lblFullName').innerText = 'Nombre completo';
-                        document.querySelector('#lblIdentificacion').innerText = 'No. Identificación';
-                        document.querySelector('#lblTipoProcedimiento').innerText = 'Tipo de procedimiento';
+                        document.querySelector('#lblTitulo').innerText = 'Título:';
+                        document.querySelector('#lblHora').innerText = 'Hora:';
+                        document.querySelector('#lblFullName').innerText = 'Nombre completo:';
+                        document.querySelector('#lblIdentificacion').innerText = 'No. Identificación:';
+                        document.querySelector('#lblTipoProcedimiento').innerText = 'Tipo de procedimiento:';
                         document.querySelector('#btnAgregar').innerText = 'Agregar';
                         document.querySelector('#btnModificar').innerText = 'Modificar';
                         document.querySelector('#btnEliminar').innerText = 'Eliminar';
                         document.querySelector('#btnCerrar').innerText = 'Cerrar';
-                        
 
-                        if (calendar.getOption('locale')=='fr') {
 
-                            calendar.setOption('locale', 'es');
-                            console.log(calendar.getOption('locale'));
-                            calendar.render;
-                            
-                            
-                        }
-                        else{
-                            calendar.setOption('locale', 'US');
-                            console.log(calendar.getOption('locale'));
-                            calendar.render;
-                            
-                        }
+                        // if (calendar.getOption('locale')=='fr') {
+
+                        //     calendar.setOption('locale', 'es');
+                        //     console.log(calendar.getOption('locale'));
+                        //     calendar.render;
+
+
+                        // }
+                        // else{
+                        //     calendar.setOption('locale', 'US');
+                        //     console.log(calendar.getOption('locale'));
+                        //     calendar.render;
+
+                        // }
+                    }
+                },
+                otroB: {
+                    text: "English",
+                    click: function() {
+
+
+                        calendar.setOption('locale');
+
+                        //console.log(calendar.getOption('locale'));
+
+                        document.querySelector('#lblTitulo').innerText = 'Title:';
+                        document.querySelector('#lblHora').innerText = 'Hour:';
+                        document.querySelector('#lblFullName').innerText = 'Full Name:';
+                        document.querySelector('#lblIdentificacion').innerText = 'Identification:';
+                        document.querySelector('#lblTipoProcedimiento').innerText = 'Type of procedure:';
+                        document.querySelector('#btnAgregar').innerText = 'Add';
+                        document.querySelector('#btnModificar').innerText = 'Modify';
+                        document.querySelector('#btnEliminar').innerText = 'Remove';
+                        document.querySelector('#btnCerrar').innerText = 'Close';
+
+
+                        // if (calendar.getOption('locale')=='fr') {
+
+                        //     calendar.setOption('locale', 'es');
+                        //     console.log(calendar.getOption('locale'));
+                        //     calendar.render;
+
+
+                        // }
+                        // else{
+                        //     calendar.setOption('locale', 'US');
+                        //     console.log(calendar.getOption('locale'));
+                        //     calendar.render;
+
+                        // }
                     }
                 }
             },
