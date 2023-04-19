@@ -13,6 +13,7 @@
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.5/index.global.min.js' defer></script>
 
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 <script>
@@ -36,7 +37,7 @@
                         calendar.setOption('locale', 'ES');
 
                         //console.log(calendar.getOption('locale'));
-
+                        document.querySelector('#lbltituloModal').innerText = 'Agendar cita';
                         document.querySelector('#lblTitulo').innerText = 'Título:';
                         document.querySelector('#lblHora').innerText = 'Hora:';
                         document.querySelector('#lblFullName').innerText = 'Nombre completo:';
@@ -47,21 +48,6 @@
                         document.querySelector('#btnEliminar').innerText = 'Eliminar';
                         document.querySelector('#btnCerrar').innerText = 'Cerrar';
 
-
-                        // if (calendar.getOption('locale')=='fr') {
-
-                        //     calendar.setOption('locale', 'es');
-                        //     console.log(calendar.getOption('locale'));
-                        //     calendar.render;
-
-
-                        // }
-                        // else{
-                        //     calendar.setOption('locale', 'US');
-                        //     console.log(calendar.getOption('locale'));
-                        //     calendar.render;
-
-                        // }
                     }
                 },
                 otroB: {
@@ -72,7 +58,7 @@
                         calendar.setOption('locale');
 
                         //console.log(calendar.getOption('locale'));
-
+                        document.querySelector('#lbltituloModal').innerText = 'Schedule appointment';
                         document.querySelector('#lblTitulo').innerText = 'Title:';
                         document.querySelector('#lblHora').innerText = 'Hour:';
                         document.querySelector('#lblFullName').innerText = 'Full Name:';
@@ -83,21 +69,6 @@
                         document.querySelector('#btnEliminar').innerText = 'Remove';
                         document.querySelector('#btnCerrar').innerText = 'Close';
 
-
-                        // if (calendar.getOption('locale')=='fr') {
-
-                        //     calendar.setOption('locale', 'es');
-                        //     console.log(calendar.getOption('locale'));
-                        //     calendar.render;
-
-
-                        // }
-                        // else{
-                        //     calendar.setOption('locale', 'US');
-                        //     console.log(calendar.getOption('locale'));
-                        //     calendar.render;
-
-                        // }
                     }
                 }
             },
@@ -156,16 +127,58 @@
         $('#btnAgregar').click(function() {
             objEvento = recolectarDatosGUI("POST");
             enviarInformacion('', objEvento);
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Your work has been saved',
+                showConfirmButton: false,
+                timer: 1500
+            })
         });
 
         $('#btnEliminar').click(function() {
-            objEvento = recolectarDatosGUI("DELETE");
-            enviarInformacion('/' + $('#txtId').val(), objEvento);
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    )
+                    objEvento = recolectarDatosGUI("DELETE");
+                    enviarInformacion('/' + $('#txtId').val(), objEvento);
+                }
+            })
+
+
         });
 
         $('#btnModificar').click(function() {
             objEvento = recolectarDatosGUI("PATCH");
             enviarInformacion('/' + $('#txtId').val(), objEvento);
+
+            // Swal.fire({
+            //     title: 'Do you want to save the changes?',
+            //     showDenyButton: true,
+            //     showCancelButton: true,
+            //     confirmButtonText: 'Save',
+            //     denyButtonText: `Don't save`,
+            // }).then((result) => {
+            //     /* Read more about isConfirmed, isDenied below */
+            //     if (result.isConfirmed) {
+            //         Swal.fire('Saved!', '', 'success')
+            //     } else if (result.isDenied) {
+            //         Swal.fire('Changes are not saved', '', 'info')
+            //     }
+            // })
         });
 
         function recolectarDatosGUI(method) {
@@ -193,6 +206,7 @@
                     console.log(msg);
                     $('#exampleModal').modal('toggle');
                     calendar.refetchEvents();
+
                 },
                 error: function() {
                     alert("Hay un error");
@@ -222,6 +236,14 @@
 @section('content')
 <div class="row">
     <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"><img src="{!! asset('images/logo.jpeg') !!}" alt="" width="250"></div>
+
+</div>
+
+
+<div class="row">
+    <div class="col"></div>
     <div class="col-9">
         <div id="calendar"></div>
     </div>
@@ -233,7 +255,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">...</h5>
+                <label class="modal-title" name="lbltituloModal" id="lbltituloModal">Schedule appointment</label>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
